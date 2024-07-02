@@ -6,6 +6,9 @@ require("dotenv").config();
 const dbConfig = require("./src/config/dbConfig");
 dbConfig();
 
+const credentialsRouter = require("./src/route/credentialRoute")
+const projectsRouter = require("./src/route/projectRoute");
+
 //basic middleware
 app.use(express.json())
 app.use(
@@ -16,6 +19,10 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/credentials", credentialsRouter);
+app.use("/projects", projectsRouter);
+
 
 //root route
 app.get("/", (req, res) => {
