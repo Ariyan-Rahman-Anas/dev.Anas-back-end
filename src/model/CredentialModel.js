@@ -14,7 +14,7 @@ const credentialSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    instituteUrl: {
+    instituteURL: {
       type: String,
       required: true,
     },
