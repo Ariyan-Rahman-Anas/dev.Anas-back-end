@@ -43,10 +43,12 @@ const createCredential = async (req, res, next) => {
 // getting credentials
 const getAllCredentials = async (req, res, next) => {
   try {
-    const data = await CredentialModel.find();
+    const credentials = await CredentialModel.find();
     res.status(200).json({
-      totalCredentials: data.length,
-      data,
+      success: true,
+      message: "All credentials retrieved successfully!",
+      totalCredentials: credentials.length,
+      credentials,
     });
   } catch (error) {
     next(error);
