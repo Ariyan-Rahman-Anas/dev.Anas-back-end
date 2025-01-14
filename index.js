@@ -24,8 +24,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/credentials", credentialsRouter);
-app.use("/projects", projectsRouter);
+app.use("/api/credentials", credentialsRouter);
+app.use("/api/projects", projectsRouter);
 
 
 //root route

@@ -3,8 +3,8 @@ const route = express.Router();
 const multer = require("multer");
 
 const {
-  createAProject,
-  readProjects,
+  createProject,
+  getAllProjects,
 } = require("./../controller/projectController");
 
 const upload = multer({
@@ -20,20 +20,7 @@ const upload = multer({
 });
 
 
-//posting a project
-// router.post("/", upload.single("image"), createAProject);
-
-//getting projects
-route.get("/", readProjects);
-
-//posting a credential
-// router.post("/", upload.single("image"), createCredential);
-//post a item
-route.post("/", upload.single("image"), createAProject );
-
-//getting credentials
-// router.get("/", readCredentials);
-//getting all items
-route.get("/", readProjects);
+route.post("/create", upload.single("image"), createProject );
+route.get("/all", getAllProjects);
 
 module.exports = route;

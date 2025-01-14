@@ -2,8 +2,24 @@ const CredentialModel = require("./../model/CredentialModel")
 const cloudUploader = require("./cloudUploader");
 
 //posting a credential
-const createCredential = async (req, res) => {
-    const {
+const createCredential = async (req, res, next) => {
+  try {
+    const { title, degreeTitle, institute, instituteURL, description, cto, greeting } = req.body;
+    if (!title || !degreeTitle || !institute || !instituteURL || !description || !cto || !greeting) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const file = req.file
+    if (!file) {
+      res.status(404).json({
+        success: false,
+        message: "No image provided",
+      })
+    };
+
+    const img_res = await cloudUploader(file)
+
+    const credential = await CredentialModel.create({
       title,
       degreeTitle,
       institute,
@@ -11,32 +27,21 @@ const createCredential = async (req, res) => {
       description,
       cto,
       greeting,
-    } = req.body;
-    const file = req.file
-    if (!file) return res.status(400).send("Please select an image");
-    try {
-        const img_res = await cloudUploader(file)
-        const aCredential = await CredentialModel.create({
-          title,
-          degreeTitle,
-          institute,
-          instituteURL,
-          description,
-          cto,
-          greeting,
-          image: img_res.secure_url,
-        });
-        console.log("The new credential is: ", aCredential);
-        return res
-          .status(201)
-          .json({ message: "Successfully created the credential!" });
-    } catch (error) {
-      console.log("An error occurred: ", error);
-      return res.status(500).json({ error: error.message });
-    }
+      image: img_res.secure_url,
+    });
+    return res.status(201).json({
+        success: true,
+        message: "Credential created Successfully!",
+        credential
+      });
+  } catch (error) {
+    next(error)
+  }
 }
 
-const readCredentials = async (req, res) => {
+
+// getting credentials
+const getAllCredentials = async (req, res, next) => {
   try {
     const data = await CredentialModel.find();
     res.status(200).json({
@@ -44,8 +49,8 @@ const readCredentials = async (req, res) => {
       data,
     });
   } catch (error) {
-    console.log("Error fetching credentials:", error);
-    res.status(500).json({ error: "Internal server error" });
+    next(error);
   }
 };
-module.exports = { createCredential, readCredentials };
+
+module.exports = { createCredential, getAllCredentials };

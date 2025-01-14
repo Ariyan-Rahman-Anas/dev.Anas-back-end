@@ -4,12 +4,12 @@ const multer = require("multer");
 
 const {
   createCredential,
-  readCredentials,
+  getAllCredentials,
 } = require("./../controller/credentialController");
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { files: 10 }, // file limit
+  limits: { files: 10 },
   fileFilter(req, file, callback) {
     if (file.mimetype.startsWith("image")) {
       callback(null, true);
@@ -21,13 +21,9 @@ const upload = multer({
 
 
 //posting a credential
-// router.post("/", upload.single("image"), createCredential);
-//post a item
-route.post("/", upload.single("image"), createCredential);
+route.post("/create", upload.single("image"), createCredential);
 
 //getting credentials
-// router.get("/", readCredentials);
-//getting all items
-route.get("/", readCredentials)
+route.get("/all", getAllCredentials)
 
 module.exports = route;

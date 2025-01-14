@@ -2,7 +2,12 @@ const mongoose = require("mongoose")
 
 const projectSchema = new mongoose.Schema(
   {
-    title: {
+    category: {
+      type: String,
+      required: true,
+      enum: ["Non-Functional", "Front-End", "Full-Stack"],
+    },
+    name: {
       type: String,
       required: true,
     },
@@ -14,15 +19,22 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    liveLink: {
-      type: String,
+    frontTech: {
+      type: [String],
       required: true,
+    },
+    backTech: {
+      type: [String],
     },
     frontCode: {
       type: String,
       required: true,
     },
     backCode: {
+      type: String,
+      required: true,
+    },
+    liveLink: {
       type: String,
       required: true,
     },
