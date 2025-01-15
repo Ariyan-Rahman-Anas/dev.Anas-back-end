@@ -32,7 +32,6 @@ const projectSchema = new mongoose.Schema(
     },
     backCode: {
       type: String,
-      required: true,
     },
     liveLink: {
       type: String,

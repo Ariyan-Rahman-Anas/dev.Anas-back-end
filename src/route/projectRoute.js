@@ -5,6 +5,7 @@ const multer = require("multer");
 const {
   createProject,
   getAllProjects,
+  getAllCategory
 } = require("./../controller/projectController");
 
 const upload = multer({
@@ -22,5 +23,6 @@ const upload = multer({
 
 route.post("/create", upload.single("image"), createProject );
 route.get("/all", getAllProjects);
+route.get("/categories", getAllCategory);
 
 module.exports = route;

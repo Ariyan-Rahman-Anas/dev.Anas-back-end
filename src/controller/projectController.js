@@ -6,6 +6,12 @@ const createProject = async (req, res, next) => {
   try {
     const { category, name, details, frontTech, backTech, aside, liveLink, frontCode, backCode } =
       req.body;
+    if (!category || !name || !details || !frontTech || !aside || !liveLink || !frontCode) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide all required fields.",
+      });
+    }
 
     const file = req.file
     if (!file) {
@@ -60,7 +66,29 @@ const getAllProjects = async (req, res, next) => {
   }
 }
 
+
+const getAllCategory = async (req, res, next) => {
+  try {
+    const categories = await ProjectModel.distinct("category")
+    if (categories.length < 1) {
+      res.status(404).json({
+        success: false,
+        message: "No categories found.",
+      })
+    } 
+    res.status(200).json({
+      success: true,
+      message: "Categories fetched successfully!",
+      totalCategories: categories.length,
+      categories
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createProject,
   getAllProjects,
+  getAllCategory
 };
