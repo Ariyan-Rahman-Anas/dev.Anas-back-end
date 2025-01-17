@@ -6,6 +6,9 @@ const createProject = async (req, res, next) => {
   try {
     const { category, name, details, frontTech, backTech, aside, liveLink, frontCode, backCode } =
       req.body;
+    
+    console.log({ category, name, details, frontTech, backTech, aside, liveLink, frontCode, backCode })
+    
     if (!category || !name || !details || !frontTech || !aside || !liveLink || !frontCode) {
       return res.status(400).json({
         success: false,
@@ -48,7 +51,7 @@ const createProject = async (req, res, next) => {
 //getting all projects
 const getAllProjects = async (req, res, next) => {
   try {
-    const projects = await ProjectModel.find({})
+    const projects = await ProjectModel.find({}).sort({ createdAt: -1 })
     if (!projects || projects.length < 1) {
       res.status(404).json({
         success: false,

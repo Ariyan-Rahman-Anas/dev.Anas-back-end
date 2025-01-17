@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Non-Functional", "Front-End", "Full-Stack"],
+      enum: ["Static", "Front-End", "Full-Stack"],
     },
     name: {
       type: String,
