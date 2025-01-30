@@ -24,7 +24,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/credentials", credentialsRouter);
+app.use("/api/certificates", credentialsRouter);
 app.use("/api/projects", projectsRouter);
 
 
