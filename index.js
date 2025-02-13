@@ -8,6 +8,7 @@ dbConfig();
 
 const credentialsRouter = require("./src/route/credentialRoute")
 const projectsRouter = require("./src/route/projectRoute");
+const specalitiesRoute = require("./src/route/specalitiesRoute");
 
 //basic middleware
 app.use(express.json())
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/certificates", credentialsRouter);
 app.use("/api/projects", projectsRouter);
+app.use("/api/specalities", specalitiesRoute);
 
 
 //root route

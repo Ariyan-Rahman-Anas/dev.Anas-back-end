@@ -38,6 +38,5 @@ const credentialSchema = new mongoose.Schema(
   },
   { timestamps: true, versionKey: false }
 );
-
 const credentialModel = mongoose.model("credentials", credentialSchema);
 module.exports = credentialModel;
