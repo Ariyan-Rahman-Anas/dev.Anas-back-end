@@ -1,4 +1,4 @@
-const SpecalitiesModel = require("./../model/SpecalitiesModel")
+const SpecalitiesModel = require("../model/SpecalitiesModel")
 
 const postSpecalities = async (req, res, next) => {
     try {
@@ -25,7 +25,6 @@ const postSpecalities = async (req, res, next) => {
     }
 }
 
-
 const getSpecalities = async (req, res, next) => {
     try {
         const specalities = await SpecalitiesModel.find({})
@@ -44,7 +43,6 @@ const getSpecalities = async (req, res, next) => {
         next(error)
     }
 }
-
 
 const editSpecalities = async (req, res, next) => {
     try {
@@ -72,6 +70,5 @@ const editSpecalities = async (req, res, next) => {
         next(error)
     }
 }
-
 
 module.exports = { postSpecalities, getSpecalities, editSpecalities }

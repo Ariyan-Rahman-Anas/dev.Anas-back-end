@@ -20,9 +20,11 @@ const experienceSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
+        default: null
     },
      duration: {
-        type: Number,
+         type: Number,
+         default:null
     },
     current: {
         type: Boolean,

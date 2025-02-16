@@ -44,7 +44,7 @@ const postExperience = async (req, res, next) => {
 
 const getExperiences = async (req, res, next) => {
     try {
-        const experiences = await ExperienceModel.find({})
+        const experiences = await ExperienceModel.find({}).sort({createdAt:-1})
         if (experiences.length < 1) {
             res.status(404).json({
                 success: false,
